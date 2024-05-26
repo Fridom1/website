@@ -30,21 +30,12 @@
         .menu {
             margin-bottom: 20px;
         }
-        .coin-icon {
+        .coin-icon, .trophy-icon {
             display: inline-block;
             margin-right: 10px;
             vertical-align: middle;
         }
-        .coin-count {
-            display: inline-block;
-            vertical-align: middle;
-        }
-        .trophy-icon {
-            display: inline-block;
-            margin-right: 10px;
-            vertical-align: middle;
-        }
-        .trophy-rank {
+        .coin-count, .trophy-rank {
             display: inline-block;
             vertical-align: middle;
         }
@@ -53,7 +44,8 @@
             margin: 20px auto;
             width: 100px;
             height: 100px;
-            background-color: gold;
+            background-image: url('coin.png');
+            background-size: cover;
             border-radius: 50%;
             cursor: pointer;
         }
@@ -84,7 +76,7 @@
         <div>
             <img src="coin.png" alt="Coin" class="coin-icon">
             <span class="coin-count">1000</span>
-            <img src="trophy.png" alt="Trophy" class="trophy-icon">
+            <img src="bronze.png" alt="Bronze Trophy" class="trophy-icon">
             <span class="trophy-rank">Bronze</span>
         </div>
     </div>
@@ -117,20 +109,6 @@
             document.querySelector('.coin-count').innerText = coins;
             document.getElementById('energy').innerText = energy + '/10';
         }
-
-        // Функция для восстановления энергии каждую секунду
-        function restoreEnergy() {
-            if (energy < 10) {
-                energy += 1;
-                updateDisplay();
-            }
-        }
-
-        // Вызываем функцию для восстановления энергии каждую секунду
-        setInterval(restoreEnergy, 1000);
-
-        // Обновляем отображение сразу после загрузки страницы
-        updateDisplay();
     </script>
 </body>
 </html>
