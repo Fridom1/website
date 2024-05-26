@@ -48,37 +48,27 @@
     <div class="header">
         <div>
             <img src="profile.jpg" alt="Profile" width="50" height="50">
-            <span>Марсель Загидуллин (CEO)</span>
+            <span id="username"></span>
         </div>
         <div>
             <img src="binance.png" alt="Binance" width="50" height="50">
         </div>
     </div>
     <div class="container">
-        <div class="stats">
-            <div>Прибыль за тап: <span id="tapProfit">+19</span></div>
-            <div>Монет для апгрейда: <span id="upgradeCoins">50M</span></div>
-            <div>Прибыль в час: <span id="hourlyProfit">+255.51K</span></div>
-            <div>Монеты: <span id="coins">12,610,875</span></div>
-        </div>
-        <div class="hamster">
-            <img src="hamster.png" alt="Hamster">
-            <div>Legendary</div>
-            <div>Level <span id="level">7/9</span></div>
-        </div>
-        <button id="tapButton">Tap to Collect Coins</button>
-        <div class="footer">
-            <div>2657/100000</div>
-            <button>Boost</button>
-        </div>
+        <!-- Ваш контент -->
     </div>
     <script>
-        let coins = 12610875;
-        let tapProfit = 19;
-        document.getElementById('tapButton').addEventListener('click', () => {
-            coins += tapProfit;
-            document.getElementById('coins').innerText = coins.toLocaleString();
+        // Добавляем функционал для отображения никнейма пользователя
+        document.addEventListener('DOMContentLoaded', function() {
+            const username = prompt('Введите ваш никнейм:');
+            if (username) {
+                document.getElementById('username').innerText = username;
+            } else {
+                document.getElementById('username').innerText = 'Гость';
+            }
         });
+
+        // Ваш JavaScript код
     </script>
 </body>
 </html>
