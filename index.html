@@ -117,6 +117,15 @@
             document.querySelector('.coin-count').innerText = coins;
             document.getElementById('energy').innerText = energy + '/10';
         }
+        // Функция для восстановления энергии каждую секунду
+        function restoreEnergy() {
+            if (energy < 10) {
+                energy += 1;
+                updateDisplay();
+            }
+        }
+        // Вызываем функцию для восстановления энергии каждую секунду
+        setInterval(restoreEnergy, 1000);
     </script>
 </body>
 </html>
