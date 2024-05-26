@@ -58,17 +58,16 @@
         <!-- Ваш контент -->
     </div>
     <script>
-        // Добавляем функционал для отображения никнейма пользователя
-        document.addEventListener('DOMContentLoaded', function() {
-            const username = prompt('Введите ваш никнейм:');
-            if (username) {
-                document.getElementById('username').innerText = username;
-            } else {
-                document.getElementById('username').innerText = 'Гость';
-            }
-        });
-
-        // Ваш JavaScript код
+        // Отправляем запрос к Telegram Bot API для получения информации о пользователе
+        fetch('https://api.telegram.org/bot7074822350:AAGCGnO6GoZsMVEGQ7J3BoIBr5t9Gmwj0bM/getMe')
+            .then(response => response.json())
+            .then(data => {
+                // Отображаем никнейм пользователя
+                document.getElementById('username').innerText = data.result.username;
+            })
+            .catch(error => {
+                console.error('Ошибка при получении информации о пользователе из Телеграмма:', error);
+            });
     </script>
 </body>
 </html>
