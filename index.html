@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hamster Kombat</title>
     <style>
+        /* Ваш CSS код */
         body {
             font-family: Arial, sans-serif;
             background-color: #2c2c2c;
@@ -12,9 +13,6 @@
             text-align: center;
             margin: 0;
             padding: 0;
-        }
-        .container {
-            padding: 20px;
         }
         .header {
             display: flex;
@@ -26,59 +24,114 @@
         .header img {
             border-radius: 50%;
         }
-        .stats {
-            margin: 20px 0;
+        .container {
+            padding: 20px;
         }
-        .stats div {
-            margin: 10px 0;
+        .menu {
+            margin-bottom: 20px;
         }
-        .hamster {
-            margin: 20px 0;
+        .coin-icon {
+            display: inline-block;
+            margin-right: 10px;
+            vertical-align: middle;
         }
-        .hamster img {
-            width: 150px;
-            height: 150px;
+        .coin-count {
+            display: inline-block;
+            vertical-align: middle;
         }
-        .footer {
+        .trophy-icon {
+            display: inline-block;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        .trophy-rank {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .big-coin {
+            display: block;
+            margin: 20px auto;
+            width: 100px;
+            height: 100px;
+            background-color: gold;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .energy {
             margin-top: 20px;
+            font-size: 20px;
+        }
+        .menu-buttons {
+            margin-top: 20px;
+        }
+        .menu-buttons button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #555;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
     <div class="header">
         <div>
-            <img src="profile.jpg" alt="Profile" width="50" height="50">
-            <span>Марсель Загидуллин (CEO)</span>
+            <button>Join channel ></button>
         </div>
         <div>
-            <img src="binance.png" alt="Binance" width="50" height="50">
+            <img src="coin.png" alt="Coin" class="coin-icon">
+            <span class="coin-count">1000</span>
+            <img src="trophy.png" alt="Trophy" class="trophy-icon">
+            <span class="trophy-rank">Bronze</span>
         </div>
     </div>
     <div class="container">
-        <div class="stats">
-            <div>Прибыль за тап: <span id="tapProfit">+19</span></div>
-            <div>Монет для апгрейда: <span id="upgradeCoins">50M</span></div>
-            <div>Прибыль в час: <span id="hourlyProfit">+255.51K</span></div>
-            <div>Монеты: <span id="coins">12,610,875</span></div>
+        <div class="menu">
+            <div class="big-coin" onclick="earnCoin()"></div>
+            <div class="energy">Energy: <span id="energy">10/10</span></div>
         </div>
-        <div class="hamster">
-            <img src="hamster.png" alt="Hamster">
-            <div>Legendary</div>
-            <div>Level <span id="level">7/9</span></div>
-        </div>
-        <button id="tapButton">Tap to Collect Coins</button>
-        <div class="footer">
-            <div>2657/100000</div>
-            <button>Boost</button>
+        <div class="menu-buttons">
+            <button>Exchange</button>
+            <button>Earn</button>
+            <button>Boosts</button>
         </div>
     </div>
     <script>
-        let coins = 12610875;
-        let tapProfit = 19;
-        document.getElementById('tapButton').addEventListener('click', () => {
-            coins += tapProfit;
-            document.getElementById('coins').innerText = coins.toLocaleString();
-        });
+        let coins = 1000;
+        let energy = 10;
+
+        // Функция для фарма монеток при клике на большую монетку
+        function earnCoin() {
+            if (energy > 0) {
+                coins += 1;
+                energy -= 1;
+                updateDisplay();
+            }
+        }
+
+        // Функция для обновления отображения монеток и энергии
+        function updateDisplay() {
+            document.querySelector('.coin-count').innerText = coins;
+            document.getElementById('energy').innerText = energy + '/10';
+        }
+
+        // Функция для восстановления энергии каждую секунду
+        function restoreEnergy() {
+            if (energy < 10) {
+                energy += 1;
+                updateDisplay();
+            }
+        }
+
+        // Вызываем функцию для восстановления энергии каждую секунду
+        setInterval(restoreEnergy, 1000);
+
+        // Обновляем отображение сразу после загрузки страницы
+        updateDisplay();
     </script>
 </body>
 </html>
+
