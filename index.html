@@ -58,16 +58,27 @@
         <!-- Ваш контент -->
     </div>
     <script>
-        // Отправляем запрос к Telegram Bot API для получения информации о пользователе
-        fetch('https://api.telegram.org/bot7074822350:AAGCGnO6GoZsMVEGQ7J3BoIBr5t9Gmwj0bM/getMe')
+        // Получение никнейма пользователя после аутентификации с помощью Telegram Passport
+        function getUserProfile() {
+            fetch('https://api.telegram.org/bot7074822350:AAGCGnO6GoZsMVEGQ7J3BoIBr5t9Gmwj0bM/getMe', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer YOUR_ACCESS_TOKEN'
+                }
+            })
             .then(response => response.json())
             .then(data => {
-                // Отображаем никнейм пользователя
-                document.getElementById('username').innerText = data.result.username;
+                const username = data.username;
+                document.getElementById('username').innerText = username || 'Гость';
             })
             .catch(error => {
-                console.error('Ошибка при получении информации о пользователе из Телеграмма:', error);
+                console.error('Ошибка при получении профиля пользователя из Телеграмма:', error);
             });
+        }
+
+        // Вызываем функцию для получения профиля пользователя
+        getUserProfile();
     </script>
 </body>
 </html>
