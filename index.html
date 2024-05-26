@@ -58,27 +58,25 @@
         <!-- Ваш контент -->
     </div>
     <script>
-        // Получение никнейма пользователя после аутентификации с помощью Telegram Passport
-        function getUserProfile() {
-            fetch('https://api.telegram.org/bot7074822350:AAGCGnO6GoZsMVEGQ7J3BoIBr5t9Gmwj0bM/getMe', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer YOUR_ACCESS_TOKEN'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                const username = data.username;
-                document.getElementById('username').innerText = username || 'Гость';
-            })
-            .catch(error => {
-                console.error('Ошибка при получении профиля пользователя из Телеграмма:', error);
-            });
-        }
+        // Получаем никнейм пользователя из localStorage
+        const storedUsername = localStorage.getItem('username');
 
-        // Вызываем функцию для получения профиля пользователя
-        getUserProfile();
+        // Если никнейм есть в localStorage, используем его
+        if (storedUsername) {
+            document.getElementById('username').innerText = storedUsername;
+        } else {
+            // Выводим запрос на ввод никнейма
+            const username = prompt('Введите ваш никнейм:');
+            if (username) {
+                // Сохраняем никнейм в localStorage
+                localStorage.setItem('username', username);
+                // Отображаем его на странице
+                document.getElementById('username').innerText = username;
+            } else {
+                document.getElementById('username').innerText = 'Гость';
+            }
+        }
     </script>
 </body>
 </html>
+
